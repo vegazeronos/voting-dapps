@@ -16,7 +16,7 @@
     );
   };*/
 
-  // components/navigation.tsx
+// components/navigation.tsx
 import Link from "next/link";
 import Image from "next/image";
 
@@ -30,7 +30,7 @@ const Navigation = () => {
             {/* Logo */}
             <div className="flex-shrink-0">
               <Image
-                src="/logo.png" 
+                src="/logo.png"
                 alt="TrustVote Logo"
                 width={60}
                 height={60}
