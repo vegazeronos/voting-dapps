@@ -39,7 +39,7 @@ export default function OrganizerDashboard() {
   const [elections, setElections] = useState(initialElections);
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  
+
   const handleDelete = (id: number) => {
     setElections(elections.filter((election) => election.id !== id));
   };
@@ -60,7 +60,7 @@ export default function OrganizerDashboard() {
     }
   };
 
-  
+
   const startIndex = currentIndex * itemsPerPage;
   const displayedElections = elections.slice(startIndex, startIndex + itemsPerPage);
 
@@ -112,11 +112,10 @@ export default function OrganizerDashboard() {
                       </h3>
                       <div className="flex items-center mb-4">
                         <span
-                          className={`inline-block w-4 h-4 rounded-full mr-2 ${
-                            election.status === "Finished"
-                              ? "bg-gray-500"
-                              : "bg-green-500"
-                          }`}
+                          className={`inline-block w-4 h-4 rounded-full mr-2 ${election.status === "Finished"
+                            ? "bg-gray-500"
+                            : "bg-green-500"
+                            }`}
                         ></span>
                         <span>{election.status}</span>
                       </div>
@@ -124,7 +123,7 @@ export default function OrganizerDashboard() {
                         {election.votedAddress.toLocaleString()} /{" "}
                         {election.whitelistedAddress.toLocaleString()} voted
                       </p>
-                      <div className="flex space-x-4">
+                      {/* <div className="flex space-x-4">
                         <Link
                           href={`/organizer/editElection/${election.id}`}
                           className="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition-colors"
@@ -137,7 +136,7 @@ export default function OrganizerDashboard() {
                         >
                           Delete Election
                         </button>
-                      </div>
+                      </div> */}
                     </div>
                   </div>
                 ))}
@@ -150,11 +149,10 @@ export default function OrganizerDashboard() {
                 <button
                   onClick={handlePrev}
                   disabled={currentIndex === 0}
-                  className={`absolute left-0 top-1/2 transform -translate-y-1/2 bg-gray-700 p-2 rounded-full ${
-                    currentIndex === 0
-                      ? "opacity-50 cursor-not-allowed"
-                      : "hover:bg-gray-600"
-                  }`}
+                  className={`absolute left-0 top-1/2 transform -translate-y-1/2 bg-gray-700 p-2 rounded-full ${currentIndex === 0
+                    ? "opacity-50 cursor-not-allowed"
+                    : "hover:bg-gray-600"
+                    }`}
                 >
                   <svg
                     className="w-6 h-6 text-white"
@@ -173,11 +171,10 @@ export default function OrganizerDashboard() {
                 <button
                   onClick={handleNext}
                   disabled={currentIndex === totalSlides - 1}
-                  className={`absolute right-0 top-1/2 transform -translate-y-1/2 bg-gray-700 p-2 rounded-full ${
-                    currentIndex === totalSlides - 1
-                      ? "opacity-50 cursor-not-allowed"
-                      : "hover:bg-gray-600"
-                  }`}
+                  className={`absolute right-0 top-1/2 transform -translate-y-1/2 bg-gray-700 p-2 rounded-full ${currentIndex === totalSlides - 1
+                    ? "opacity-50 cursor-not-allowed"
+                    : "hover:bg-gray-600"
+                    }`}
                 >
                   <svg
                     className="w-6 h-6 text-white"
