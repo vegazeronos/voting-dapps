@@ -1,6 +1,5 @@
 import Link from "next/link";
 import Image from "next/image";
-import { ConnectButton } from "@rainbow-me/rainbowkit";
 
 export default function Home() {
   return (
@@ -16,7 +15,6 @@ export default function Home() {
             <h1 className="text-4xl md:text-5xl font-bold mb-4">
               Secure, Platform-Based DApp Voting
             </h1>
-            <ConnectButton/>
             <p className="text-gray-400 mb-6">
               Create an election for your school or organization in seconds.
               Your voters can vote from any location on any device.
