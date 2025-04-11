@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 :root {
-  --background: #1E1E2E;
-  --foreground: #2A2A3A;
+  --background: #1e1e2e;
+  --foreground: #2a2a3a;
 }
 
 @theme inline {
@@ -14,8 +14,8 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #1e1e2e;
+    --navbar-border: rgba(255, 255, 255, 0.1); /* Custom border color */
   }
 }
 
