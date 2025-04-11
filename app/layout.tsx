@@ -3,7 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navigation from "@/components/navigation";
 import Footer from "@/components/sitemap";
-import App from "./App";
+import WagmiProviderWrapper from "@/components/connectWallet";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -31,9 +31,10 @@ export default function RootLayout({
       //className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
 
-     
-        <Navigation />
-        <App>{children}</App>
+        <WagmiProviderWrapper>
+          <Navigation />
+          {children}
+        </WagmiProviderWrapper>
         <Footer />
       </body>
     </html>

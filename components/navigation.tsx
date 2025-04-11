@@ -1,24 +1,10 @@
-/*export const Navigation = () => {
-    return (
-      <nav className="bg-[var(--background)] border-b border-[var(--foreground)]/10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between h-16 items-center">
-            <div className="flex-shrink-0">
-              <h1 className="text-xl font-semibold text-[var(--foreground)]">
-                TrustVote
-              </h1>
-            </div>
-            <div className="flex items-center gap-4">
-            </div>
-          </div>
-        </div>
-      </nav>
-    );
-  };*/
 
-// components/navigation.tsx
 import Link from "next/link";
 import Image from "next/image";
+import { ConnectButton } from "@rainbow-me/rainbowkit";
+
+
+
 
 const Navigation = () => {
   return (
@@ -55,7 +41,12 @@ const Navigation = () => {
           </div>
 
           {/* Connect to Wallet Text */}
-          <div className="text-gray-400">Connect to Wallet</div>
+          <ConnectButton 
+            label="Connect to Wallet"
+            showBalance={false}
+            chainStatus={"none"}
+            accountStatus={"address"}
+          />
         </div>
       </div>
     </nav>
