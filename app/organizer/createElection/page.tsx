@@ -1,9 +1,9 @@
+
 "use client";
 
 import { useState, useRef } from "react";
 import Link from "next/link";
 import { RefObject } from "react";
-
 
 interface Candidate {
   id: number;
@@ -102,7 +102,7 @@ export default function CreateElection() {
       return;
     }
     setWhitelistAddresses([...whitelistAddresses, newAddress]);
-    setNewAddress(""); 
+    setNewAddress("");
   };
 
   // Fungsi untuk menghapus alamat dari whitelist
@@ -139,7 +139,7 @@ export default function CreateElection() {
       startDate,
       endDate,
       candidates,
-      whitelistAddresses, 
+      whitelistAddresses,
     });
     alert("Election created successfully!");
   };
@@ -210,7 +210,7 @@ export default function CreateElection() {
           <div className="mb-6">
             <h2 className="text-xl font-semibold mb-4">Candidate</h2>
             {candidates.map((candidate, index) => (
-              <div key={candidate.id} className="mb-4 flex items-center space-x-4">
+              <div key={candidate.id} className="mb-6 flex flex-col md:flex-row md:items-center md:space-x-4 space-y-4 md:space-y-0">
                 <div className="flex-1">
                   <label className="block text-lg font-medium mb-2">
                     {index + 1}{index === 0 ? "st" : index === 1 ? "nd" : "rd"} Candidate
@@ -224,7 +224,7 @@ export default function CreateElection() {
                     required
                   />
                 </div>
-                <div className="flex items-center space-x-2">
+                <div className="flex flex-col sm:flex-row sm:items-center gap-3">
                   <button
                     type="button"
                     onClick={() => handleUploadClick(index)}
@@ -240,22 +240,27 @@ export default function CreateElection() {
                     ref={fileInputRefs[index]}
                   />
                   {candidate.photo && (
-                    <img
-                      src={URL.createObjectURL(candidate.photo)}
-                      alt={`Candidate ${index + 1}`}
-                      className="w-16 h-16 object-cover rounded-full"
-                    />
+                    <div className="flex flex-col items-center gap-1">
+                      <img
+                        src={URL.createObjectURL(candidate.photo)}
+                        alt={`Candidate ${index + 1}`}
+                        className="w-16 h-16 object-cover rounded-full"
+                      />
+                      <p className="text-sm text-gray-300 truncate max-w-[120px]">
+                        {candidate.photo.name}
+                      </p>
+                    </div>
+                  )}
+                  {candidates.length > 2 && (
+                    <button
+                      type="button"
+                      onClick={() => handleDeleteCandidate(candidate.id)}
+                      className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition-colors"
+                    >
+                      Delete
+                    </button>
                   )}
                 </div>
-                {candidates.length > 2 && (
-                  <button
-                    type="button"
-                    onClick={() => handleDeleteCandidate(candidate.id)}
-                    className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition-colors"
-                  >
-                    Delete Candidate
-                  </button>
-                )}
               </div>
             ))}
           </div>
@@ -266,9 +271,8 @@ export default function CreateElection() {
               type="button"
               onClick={handleAddCandidate}
               disabled={candidates.length >= 3}
-              className={`w-full bg-green-500 text-white px-6 py-3 rounded-lg transition-colors ${
-                candidates.length >= 3 ? "opacity-50 cursor-not-allowed" : "hover:bg-green-600"
-              }`}
+              className={`w-full bg-green-500 text-white px-6 py-3 rounded-lg transition-colors ${candidates.length >= 3 ? "opacity-50 cursor-not-allowed" : "hover:bg-green-600"
+                }`}
             >
               Add New Candidate
             </button>
@@ -297,78 +301,80 @@ export default function CreateElection() {
         </form>
 
         {/* Modal Whitelist Voters */}
-        {isModalOpen && (
-          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-            <div className="bg-[#2D3748] text-white rounded-lg p-6 w-full max-w-md">
-              <h2 className="text-2xl font-semibold mb-4">Whitelist Voters</h2>
+        {
+          isModalOpen && (
+            <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+              <div className="bg-[#2D3748] text-white rounded-lg p-6 w-full max-w-md max-h-[90vh] overflow-y-auto">
+                <h2 className="text-2xl font-semibold mb-4">Whitelist Voters</h2>
 
-              {/* Input untuk alamat wallet */}
-              <div className="mb-4">
-                <label className="block text-lg font-medium mb-2">Wallet Address</label>
-                <div className="flex space-x-2">
-                  <input
-                    type="text"
-                    value={newAddress}
-                    onChange={(e) => setNewAddress(e.target.value)}
-                    className="w-full p-3 bg-gray-200 text-black rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
-                    placeholder="Enter wallet address"
-                  />
+                {/* Input untuk alamat wallet */}
+                <div className="mb-4">
+                  <label className="block text-lg font-medium mb-2">Wallet Address</label>
+                  <div className="flex space-x-2">
+                    <input
+                      type="text"
+                      value={newAddress}
+                      onChange={(e) => setNewAddress(e.target.value)}
+                      className="w-full p-3 bg-gray-200 text-black rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+                      placeholder="Enter wallet address"
+                    />
+                    <button
+                      type="button"
+                      onClick={handleAddAddress}
+                      className="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition-colors"
+                    >
+                      Add
+                    </button>
+                  </div>
+                </div>
+
+                {/* Daftar alamat yang sudah ditambahkan */}
+                <div className="mb-4 max-h-40 overflow-y-auto">
+                  <h3 className="text-lg font-medium mb-2">Whitelisted Addresses</h3>
+                  {whitelistAddresses.length === 0 ? (
+                    <p className="text-gray-400">No addresses added yet.</p>
+                  ) : (
+                    <ul className="space-y-2">
+                      {whitelistAddresses.map((address, index) => (
+                        <li
+                          key={index}
+                          className="flex justify-between items-center bg-gray-700 p-2 rounded-lg"
+                        >
+                          <span className="truncate">{address}</span>
+                          <button
+                            type="button"
+                            onClick={() => handleRemoveAddress(address)}
+                            className="bg-red-500 text-white px-2 py-1 rounded-lg hover:bg-red-600 transition-colors"
+                          >
+                            Remove
+                          </button>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
+
+                {/* Tombol aksi */}
+                <div className="flex justify-end space-x-2">
                   <button
                     type="button"
-                    onClick={handleAddAddress}
+                    onClick={handleCloseModal}
+                    className="bg-gray-500 text-white px-4 py-2 rounded-lg hover:bg-gray-600 transition-colors"
+                  >
+                    Close
+                  </button>
+                  <button
+                    type="button"
+                    onClick={handleSaveWhitelist}
                     className="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition-colors"
                   >
-                    Add
+                    Save
                   </button>
                 </div>
               </div>
-
-              {/* Daftar alamat yang sudah ditambahkan */}
-              <div className="mb-4 max-h-40 overflow-y-auto">
-                <h3 className="text-lg font-medium mb-2">Whitelisted Addresses</h3>
-                {whitelistAddresses.length === 0 ? (
-                  <p className="text-gray-400">No addresses added yet.</p>
-                ) : (
-                  <ul className="space-y-2">
-                    {whitelistAddresses.map((address, index) => (
-                      <li
-                        key={index}
-                        className="flex justify-between items-center bg-gray-700 p-2 rounded-lg"
-                      >
-                        <span className="truncate">{address}</span>
-                        <button
-                          type="button"
-                          onClick={() => handleRemoveAddress(address)}
-                          className="bg-red-500 text-white px-2 py-1 rounded-lg hover:bg-red-600 transition-colors"
-                        >
-                          Remove
-                        </button>
-                      </li>
-                    ))}
-                  </ul>
-                )}
-              </div>
-
-              {/* Tombol aksi */}
-              <div className="flex justify-end space-x-2">
-                <button
-                  type="button"
-                  onClick={handleCloseModal}
-                  className="bg-gray-500 text-white px-4 py-2 rounded-lg hover:bg-gray-600 transition-colors"
-                >
-                  Close
-                </button>
-                <button
-                  type="button"
-                  onClick={handleSaveWhitelist}
-                  className="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition-colors"
-                >
-                  Save
-                </button>
-              </div>
             </div>
-          </div>
-        )}
+          )
+        }
       </div>
     </main>
   );

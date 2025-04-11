@@ -1,3 +1,4 @@
+
 "use client";
 
 import Link from "next/link";
@@ -9,7 +10,7 @@ interface Election {
   description: string;
   status: string;
   endVotingTime: number | null;
-  isPlaceholder?: boolean; 
+  isPlaceholder?: boolean;
 }
 
 const initialElections: Election[] = [
@@ -79,7 +80,7 @@ export default function VotersDashboard() {
     return () => clearInterval(interval);
   }, [elections]);
 
-  
+
   const itemsPerPage = 3;
   const totalSlides = Math.ceil(elections.length / itemsPerPage);
 
@@ -98,7 +99,7 @@ export default function VotersDashboard() {
   const startIndex = currentIndex * itemsPerPage;
   const displayedElections = elections.slice(startIndex, startIndex + itemsPerPage);
 
-  
+
   const placeholderCount = itemsPerPage - displayedElections.length;
   const placeholders: Election[] = Array.from({ length: placeholderCount }, (_, index) => ({
     id: `placeholder-${index}`,
@@ -116,7 +117,7 @@ export default function VotersDashboard() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Judul dan Link ke Dashboard Organizer */}
         <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-bold mb-2">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-2">
             DASHBOARD VOTER
           </h1>
           <Link
@@ -129,34 +130,33 @@ export default function VotersDashboard() {
 
         {/* Tabel Available Election */}
         <div className="mb-8">
-          <h2 className="text-2xl font-semibold mb-4">Available Election</h2>
+          <h2 className="text-xl sm:text-2xl font-semibold mb-4">Available Election</h2>
           <div className="relative">
             {/* Slider Container */}
             <div className="flex overflow-hidden">
-              <div className="flex w-full">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 w-full">
                 {finalDisplayedItems.map((election, index) => (
                   <div
                     key={election.id}
-                    className="w-1/3 px-4"
+                    className="px-4"
                   >
                     <div className="bg-[#2D3748] p-6 rounded-lg h-full">
-                      <h3 className="text-xl font-semibold mb-2">
+                      <h3 className="text-lg sm:text-xl font-semibold mb-2">
                         {election.isPlaceholder ? "No Election" : `Election ${startIndex + index + 1}`}
                       </h3>
-                      <h4 className="text-lg font-medium mb-2">
+                      <h4 className="text-base sm:text-lg font-medium mb-2">
                         {election.title}
                       </h4>
-                      <p className="text-gray-400 mb-2">
+                      <p className="text-gray-400 mb-2 text-sm sm:text-base">
                         {election.description}
                       </p>
                       <div className="flex items-center mb-4">
                         {!election.isPlaceholder && (
                           <span
-                            className={`inline-block w-4 h-4 rounded-full mr-2 ${
-                              election.status === "FINISHED"
+                            className={`inline-block w-4 h-4 rounded-full mr-2 ${election.status === "FINISHED"
                                 ? "bg-gray-500"
                                 : "bg-green-500"
-                            }`}
+                              }`}
                           ></span>
                         )}
                         <span>
@@ -185,11 +185,10 @@ export default function VotersDashboard() {
                 <button
                   onClick={handlePrev}
                   disabled={currentIndex === 0}
-                  className={`absolute left-0 top-1/2 transform -translate-y-1/2 bg-gray-700 p-2 rounded-full ${
-                    currentIndex === 0
+                  className={`absolute left-0 top-1/2 transform -translate-y-1/2 bg-gray-700 p-2 rounded-full ${currentIndex === 0
                       ? "opacity-50 cursor-not-allowed"
                       : "hover:bg-gray-600"
-                  }`}
+                    }`}
                 >
                   <svg
                     className="w-6 h-6 text-white"
@@ -208,11 +207,10 @@ export default function VotersDashboard() {
                 <button
                   onClick={handleNext}
                   disabled={currentIndex === totalSlides - 1}
-                  className={`absolute right-0 top-1/2 transform -translate-y-1/2 bg-gray-700 p-2 rounded-full ${
-                    currentIndex === totalSlides - 1
+                  className={`absolute right-0 top-1/2 transform -translate-y-1/2 bg-gray-700 p-2 rounded-full ${currentIndex === totalSlides - 1
                       ? "opacity-50 cursor-not-allowed"
                       : "hover:bg-gray-600"
-                  }`}
+                    }`}
                 >
                   <svg
                     className="w-6 h-6 text-white"

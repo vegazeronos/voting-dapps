@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState, useEffect } from "react";
@@ -20,10 +21,10 @@ interface Election {
   endDate: string;
   candidates: Candidate[];
   whitelistAddresses: string[];
-  status: "Active" | "Finished"; 
-  totalVoted: number; 
-  totalWhitelisted: number; 
-  percentage: number; 
+  status: "Active" | "Finished";
+  totalVoted: number;
+  totalWhitelisted: number;
+  percentage: number;
 }
 
 export default function TopVotePage() {
@@ -37,33 +38,33 @@ export default function TopVotePage() {
       title: "US President Election",
       description: "Election for the President of the United States 2024",
       startDate: "2024-10-01T00:00:00",
-      endDate: "2024-11-05T23:59:59", 
+      endDate: "2024-11-05T23:59:59",
       candidates: [
         { id: 1, name: "Candidate 1", photo: "/candidate1.png", votes: 500 },
         { id: 2, name: "Candidate 2", photo: "/candidate2.png", votes: 500 },
       ],
-      whitelistAddresses: Array(1000).fill("0x123..."), 
-      status: "Active", 
-      totalVoted: 1000, 
+      whitelistAddresses: Array(1000).fill("0x123..."),
+      status: "Active",
+      totalVoted: 1000,
       totalWhitelisted: 1000,
-      percentage: 0, 
+      percentage: 0,
     },
     {
       id: "2",
       title: "Indonesia President Election",
       description: "Election for the President of Indonesia 2024",
       startDate: "2024-10-01T00:00:00",
-      endDate: "2025-04-10T23:59:59", 
+      endDate: "2025-04-10T23:59:59",
       candidates: [
         { id: 1, name: "Anies & Imin", photo: "/1.png", votes: 300 },
         { id: 2, name: "Prabowo & Gibran", photo: "/2.png", votes: 500 },
         { id: 3, name: "Ganjar & Mahfud", photo: "/3.png", votes: 300 },
       ],
-      whitelistAddresses: Array(1000).fill("0x123..."), 
-      status: "Active", 
-      totalVoted: 700, 
+      whitelistAddresses: Array(1000).fill("0x123..."),
+      status: "Active",
+      totalVoted: 700,
       totalWhitelisted: 1000,
-      percentage: 0, 
+      percentage: 0,
     },
     {
       id: "3",
@@ -75,15 +76,14 @@ export default function TopVotePage() {
         { id: 1, name: "Candidate A", photo: "/candidateA.png", votes: 150 },
         { id: 2, name: "Candidate B", photo: "/candidateB.png", votes: 150 },
       ],
-      whitelistAddresses: Array(1000).fill("0x123..."), 
-      status: "Active", 
-      totalVoted: 300, 
+      whitelistAddresses: Array(1000).fill("0x123..."),
+      status: "Active",
+      totalVoted: 300,
       totalWhitelisted: 1000,
-      percentage: 0, 
+      percentage: 0,
     },
   ];
 
-  
   useEffect(() => {
     const updatedElections = dummyElections.map((election) => {
       // Tentukan status Active/Finished
@@ -126,7 +126,7 @@ export default function TopVotePage() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Judul */}
         <div className="mb-12">
-          <h1 className="text-4xl md:text-5xl font-bold">Top Vote</h1>
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold">Top Vote</h1>
         </div>
 
         {/* Daftar Election */}
@@ -137,9 +137,9 @@ export default function TopVotePage() {
               className="bg-[#2A2A3A] rounded-lg p-4 cursor-pointer hover:bg-[#333344] transition-colors"
               onClick={() => handleElectionClick(election.id, election.whitelistAddresses)}
             >
-              <div className="flex justify-between items-center">
-                <div className="flex-1">
-                  <h3 className="text-lg font-semibold mb-2">{election.title}</h3>
+              <div className="flex flex-col md:flex-row justify-between items-center">
+                <div className="flex-1 mb-4 md:mb-0">
+                  <h3 className="text-lg sm:text-xl font-semibold mb-2">{election.title}</h3>
                   <div className="w-full bg-gray-600 rounded-full h-6">
                     <div
                       className="bg-green-500 h-6 rounded-full"
@@ -148,11 +148,10 @@ export default function TopVotePage() {
                   </div>
                 </div>
                 <div className="text-right ml-4">
-                  <p className="text-lg">{election.percentage}%</p>
+                  <p className="text-lg sm:text-xl">{election.percentage}%</p>
                   <p
-                    className={`text-sm ${
-                      election.status === "Active" ? "text-green-500" : "text-red-500"
-                    }`}
+                    className={`text-sm sm:text-base ${election.status === "Active" ? "text-green-500" : "text-red-500"
+                      }`}
                   >
                     {election.status}
                   </p>

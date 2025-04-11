@@ -1,8 +1,8 @@
+
 "use client";
 
 import { useState, useEffect } from "react";
 import { useParams } from "next/navigation";
-
 
 interface Candidate {
   id: number;
@@ -10,7 +10,6 @@ interface Candidate {
   photo: string | null;
   votes: number;
 }
-
 
 interface Election {
   id: string;
@@ -23,7 +22,7 @@ interface Election {
 }
 
 export default function VotingResultPage() {
-  const { electionId } = useParams(); 
+  const { electionId } = useParams();
   const [election, setElection] = useState<Election | null>(null);
   const [endTime, setEndTime] = useState<string>("");
   const [status, setStatus] = useState<"Active" | "Finished">("Active");
@@ -35,28 +34,28 @@ export default function VotingResultPage() {
     title: "Indonesian President Election",
     description: "Election for the President of Indonesia 2024",
     startDate: "2024-10-01T00:00:00",
-    endDate: "2025-04-10T23:59:59", 
+    endDate: "2025-04-10T23:59:59",
     candidates: [
       {
         id: 1,
         name: "Anies & Imin",
         photo: "/1.png",
-        votes: 300, 
+        votes: 300,
       },
       {
         id: 2,
         name: "Prabowo & Gibran",
         photo: "/2.png",
-        votes: 500, 
+        votes: 500,
       },
       {
         id: 3,
         name: "Ganjar & Mahfud",
         photo: "/3.png",
-        votes: 300, 
+        votes: 300,
       },
     ],
-    whitelistAddresses: ["0x123...", "0x456..."], 
+    whitelistAddresses: ["0x123...", "0x456..."],
   };
 
   // Simulasi pengambilan data berdasarkan electionId
@@ -112,10 +111,10 @@ export default function VotingResultPage() {
         {/* Judul Election dan Status */}
         <div className="flex justify-between items-center mb-12">
           <div className="text-center flex-1">
-            <h1 className="text-4xl md:text-5xl font-bold mb-2">
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-2">
               Election: {election.title}
             </h1>
-            <p className="text-lg">Real Time Result</p>
+            <p className="text-sm md:text-lg">Real Time Result</p>
           </div>
           <div className="text-right">
             <span
@@ -129,23 +128,23 @@ export default function VotingResultPage() {
         </div>
 
         {/* Daftar Kandidat */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-4xl mx-auto">
           {election.candidates.map((candidate) => (
             <div
               key={candidate.id}
               className="bg-[#2A2A3A] rounded-lg p-4 flex flex-col items-center justify-between"
               style={{
-                minHeight: "400px", 
+                minHeight: "400px",
               }}
             >
               {candidate.photo ? (
                 <img
                   src={candidate.photo}
                   alt={candidate.name}
-                  className="w-60 h-60 object-cover rounded-lg mb-4"
+                  className="w-48 h-48 object-cover rounded-lg mb-4"
                 />
               ) : (
-                <div className="w-60 h-60 bg-gray-500 rounded-lg mb-4 flex items-center justify-center">
+                <div className="w-48 h-48 bg-gray-500 rounded-lg mb-4 flex items-center justify-center">
                   <span className="text-gray-300">No Photo</span>
                 </div>
               )}
@@ -157,7 +156,7 @@ export default function VotingResultPage() {
 
         {/* End Time dan Total Votes */}
         <div className="text-center mt-8">
-          <p className="text-lg">
+          <p className="text-sm md:text-lg">
             Ends in: <span className="text-red-500">{endTime}</span>{" "}
             {totalVotes} of {election.whitelistAddresses.length} have voted
           </p>
