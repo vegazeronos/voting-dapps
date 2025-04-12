@@ -1,17 +1,18 @@
+
 import Link from "next/link";
 
 export default function Home() {
   return (
-    <main className="bg-[#1A202C] text-white">
+    <main className="bg-[#1A202C] text-white overflow-x-hidden">
       {/* Section 1: Welcome */}
       <section id="welcome" className="min-h-screen flex items-center justify-center py-16 border-b-4 border-[var(--foreground)]/10">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center">
           {/* Text */}
           <div className="md:w-1/2 mb-8 md:mb-0 text-center md:text-left">
-            <h1 className="text-6xl sm:text-6xl md:text-7xl font-bold mb-6 ml-4">Secure, Platform-Based DApp Voting</h1>
-            <p className="text-gray-400 text-xl mb-7 ml-5">Create an election for your school or organization in seconds. Your voters can vote from any location on any device.</p>
-            <div className="flex flex-col sm:flex-row justify-center md:justify-start gap-4">
-              <Link href="/organizer/dashboard" className="border border-green-500 text-green-500 px-6 py-3 rounded-lg hover:bg-green-500 hover:text-white transition-colors text-center ml-5">
+            <h1 className="text-6xl sm:text-6xl md:text-7xl font-bold mb-6">Secure, Platform-Based DApp Voting</h1>
+            <p className="text-gray-400 text-xl mb-7">Create an election for your school or organization in seconds. Your voters can vote from any location on any device.</p>
+            <div className="flex flex-row flex-wrap justify-center md:justify-start gap-4">
+              <Link href="/organizer/dashboard" className="border border-green-500 text-green-500 px-6 py-3 rounded-lg hover:bg-green-500 hover:text-white transition-colors text-center">
                 Create an Election
               </Link>
               <Link href="/voters/dashboard" className="border border-green-500 text-green-500 px-6 py-3 rounded-lg hover:bg-green-500 hover:text-white transition-colors text-center">
