@@ -1,0 +1,405 @@
+[
+  {
+      "inputs": [
+          {
+              "internalType": "string",
+              "name": "reason",
+              "type": "string"
+          }
+      ],
+      "name": "InvalidInput",
+      "type": "error"
+  },
+  {
+      "inputs": [],
+      "name": "ReentrancyGuardReentrantCall",
+      "type": "error"
+  },
+  {
+      "anonymous": false,
+      "inputs": [
+          {
+              "indexed": true,
+              "internalType": "uint256",
+              "name": "idElection",
+              "type": "uint256"
+          },
+          {
+              "indexed": true,
+              "internalType": "address",
+              "name": "addrOrg",
+              "type": "address"
+          },
+          {
+              "indexed": false,
+              "internalType": "string",
+              "name": "title",
+              "type": "string"
+          },
+          {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "startDate",
+              "type": "uint256"
+          },
+          {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "endDate",
+              "type": "uint256"
+          }
+      ],
+      "name": "electionCreated",
+      "type": "event"
+  },
+  {
+      "anonymous": false,
+      "inputs": [
+          {
+              "indexed": true,
+              "internalType": "uint256",
+              "name": "idElection",
+              "type": "uint256"
+          },
+          {
+              "indexed": true,
+              "internalType": "address",
+              "name": "voterAddr",
+              "type": "address"
+          },
+          {
+              "indexed": true,
+              "internalType": "uint256",
+              "name": "idCandidate",
+              "type": "uint256"
+          }
+      ],
+      "name": "votingSuccess",
+      "type": "event"
+  },
+  {
+      "inputs": [
+          {
+              "internalType": "string",
+              "name": "title",
+              "type": "string"
+          },
+          {
+              "internalType": "string",
+              "name": "description",
+              "type": "string"
+          },
+          {
+              "internalType": "uint64",
+              "name": "startDate",
+              "type": "uint64"
+          },
+          {
+              "internalType": "uint64",
+              "name": "endDate",
+              "type": "uint64"
+          },
+          {
+              "internalType": "address[]",
+              "name": "whitelist",
+              "type": "address[]"
+          },
+          {
+              "components": [
+                  {
+                      "internalType": "uint256",
+                      "name": "idCandidate",
+                      "type": "uint256"
+                  },
+                  {
+                      "internalType": "string",
+                      "name": "name",
+                      "type": "string"
+                  },
+                  {
+                      "internalType": "string",
+                      "name": "pic",
+                      "type": "string"
+                  },
+                  {
+                      "internalType": "uint256",
+                      "name": "votedCandidate",
+                      "type": "uint256"
+                  }
+              ],
+              "internalType": "struct TrustVote.Candidate[]",
+              "name": "candidateList",
+              "type": "tuple[]"
+          }
+      ],
+      "name": "createElection",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+  },
+  {
+      "inputs": [
+          {
+              "internalType": "uint256",
+              "name": "idElection",
+              "type": "uint256"
+          }
+      ],
+      "name": "getCandidates",
+      "outputs": [
+          {
+              "components": [
+                  {
+                      "internalType": "uint256",
+                      "name": "idCandidate",
+                      "type": "uint256"
+                  },
+                  {
+                      "internalType": "string",
+                      "name": "name",
+                      "type": "string"
+                  },
+                  {
+                      "internalType": "string",
+                      "name": "pic",
+                      "type": "string"
+                  },
+                  {
+                      "internalType": "uint256",
+                      "name": "votedCandidate",
+                      "type": "uint256"
+                  }
+              ],
+              "internalType": "struct TrustVote.Candidate[]",
+              "name": "",
+              "type": "tuple[]"
+          }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+  },
+  {
+      "inputs": [
+          {
+              "internalType": "uint256",
+              "name": "idElection",
+              "type": "uint256"
+          }
+      ],
+      "name": "getElection",
+      "outputs": [
+          {
+              "components": [
+                  {
+                      "internalType": "uint256",
+                      "name": "idElection",
+                      "type": "uint256"
+                  },
+                  {
+                      "internalType": "string",
+                      "name": "title",
+                      "type": "string"
+                  },
+                  {
+                      "internalType": "string",
+                      "name": "descr",
+                      "type": "string"
+                  },
+                  {
+                      "internalType": "uint64",
+                      "name": "startDate",
+                      "type": "uint64"
+                  },
+                  {
+                      "internalType": "uint64",
+                      "name": "endDate",
+                      "type": "uint64"
+                  },
+                  {
+                      "internalType": "address",
+                      "name": "addrOrg",
+                      "type": "address"
+                  },
+                  {
+                      "internalType": "uint256",
+                      "name": "totalVoter",
+                      "type": "uint256"
+                  },
+                  {
+                      "internalType": "uint128",
+                      "name": "totalHasVoted",
+                      "type": "uint128"
+                  }
+              ],
+              "internalType": "struct TrustVote.Election",
+              "name": "",
+              "type": "tuple"
+          }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+  },
+  {
+      "inputs": [
+          {
+              "internalType": "address",
+              "name": "addrOrg",
+              "type": "address"
+          }
+      ],
+      "name": "getOrganizerElection",
+      "outputs": [
+          {
+              "internalType": "uint256[]",
+              "name": "",
+              "type": "uint256[]"
+          }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+  },
+  {
+      "inputs": [],
+      "name": "getTopVotes",
+      "outputs": [
+          {
+              "components": [
+                  {
+                      "internalType": "uint256",
+                      "name": "idElection",
+                      "type": "uint256"
+                  },
+                  {
+                      "internalType": "string",
+                      "name": "title",
+                      "type": "string"
+                  },
+                  {
+                      "internalType": "uint64",
+                      "name": "endDate",
+                      "type": "uint64"
+                  },
+                  {
+                      "internalType": "uint256",
+                      "name": "totalVoter",
+                      "type": "uint256"
+                  },
+                  {
+                      "internalType": "uint128",
+                      "name": "totalHasVoted",
+                      "type": "uint128"
+                  }
+              ],
+              "internalType": "struct TrustVote.ElectionSummary[]",
+              "name": "",
+              "type": "tuple[]"
+          }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+  },
+  {
+      "inputs": [
+          {
+              "internalType": "address",
+              "name": "addrVoter",
+              "type": "address"
+          }
+      ],
+      "name": "getVoterElection",
+      "outputs": [
+          {
+              "internalType": "uint256[]",
+              "name": "",
+              "type": "uint256[]"
+          }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+  },
+  {
+      "inputs": [
+          {
+              "internalType": "uint256",
+              "name": "idElection",
+              "type": "uint256"
+          }
+      ],
+      "name": "getWhitelistedVoter",
+      "outputs": [
+          {
+              "internalType": "address[]",
+              "name": "",
+              "type": "address[]"
+          }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+  },
+  {
+      "inputs": [
+          {
+              "internalType": "uint256",
+              "name": "",
+              "type": "uint256"
+          },
+          {
+              "internalType": "address",
+              "name": "",
+              "type": "address"
+          }
+      ],
+      "name": "hasVoted",
+      "outputs": [
+          {
+              "internalType": "bool",
+              "name": "",
+              "type": "bool"
+          }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+  },
+  {
+      "inputs": [
+          {
+              "internalType": "uint256",
+              "name": "",
+              "type": "uint256"
+          },
+          {
+              "internalType": "address",
+              "name": "",
+              "type": "address"
+          }
+      ],
+      "name": "isWhitelisted",
+      "outputs": [
+          {
+              "internalType": "bool",
+              "name": "",
+              "type": "bool"
+          }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+  },
+  {
+      "inputs": [
+          {
+              "internalType": "uint256",
+              "name": "idElection",
+              "type": "uint256"
+          },
+          {
+              "internalType": "uint256",
+              "name": "idCandidate",
+              "type": "uint256"
+          }
+      ],
+      "name": "voting",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+  }
+]

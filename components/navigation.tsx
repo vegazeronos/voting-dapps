@@ -24,7 +24,7 @@ const Navigation = () => {
           </div>
 
           {/* Connect to Wallet Text */}
-          <ConnectButton label="Connect to Wallet" showBalance={false} chainStatus={"none"} accountStatus={"address"} />
+          <ConnectButton label="Connect to Wallet" showBalance={false} accountStatus={"address"} />
         </div>
       </div>
     </nav>
